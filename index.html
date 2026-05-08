@@ -3,187 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Search Portal</title>
+<title>Rahul Dashboard</title>
 
 <style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-        font-family:Arial,sans-serif;
-    }
 
-    body{
-        background:#0f172a;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        min-height:100vh;
-        padding:20px;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-    .container{
-        width:100%;
-        max-width:420px;
-        background:rgba(255,255,255,0.08);
-        backdrop-filter:blur(10px);
-        border:1px solid rgba(255,255,255,0.15);
-        border-radius:22px;
-        padding:25px;
-        box-shadow:0 8px 25px rgba(0,0,0,0.3);
-    }
+body{
+    background:#0f172a;
+    color:white;
+    min-height:100vh;
+    padding:20px;
+}
 
-    h2{
-        color:white;
-        text-align:center;
-        margin-bottom:20px;
-        font-size:24px;
-    }
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:32px;
+}
 
-    .search-box{
-        display:flex;
-        gap:10px;
-        margin-bottom:15px;
-    }
+.search-container{
+    display:flex;
+    gap:10px;
+    max-width:600px;
+    margin:0 auto 25px auto;
+}
 
-    input{
-        flex:1;
-        padding:14px;
-        border:none;
-        border-radius:14px;
-        outline:none;
-        font-size:16px;
-    }
+input{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    font-size:16px;
+    outline:none;
+}
 
-    button{
-        border:none;
-        cursor:pointer;
-        border-radius:14px;
-        padding:0 16px;
-        font-size:18px;
-        transition:0.3s;
-    }
+button{
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    padding:15px 18px;
+    font-size:16px;
+    transition:0.3s;
+}
 
-    .mic-btn{
-        background:#ef4444;
-        color:white;
-    }
+.search-btn{
+    background:#2563eb;
+    color:white;
+}
 
-    .mic-btn:hover{
-        background:#dc2626;
-    }
+.search-btn:hover{
+    background:#1d4ed8;
+}
 
-    select{
-        width:100%;
-        padding:14px;
-        border:none;
-        border-radius:14px;
-        margin-bottom:15px;
-        font-size:16px;
-        outline:none;
-    }
+.voice-btn{
+    background:#ef4444;
+    color:white;
+}
 
-    .search-btn{
-        width:100%;
-        padding:14px;
-        background:#2563eb;
-        color:white;
-        font-size:18px;
-        font-weight:bold;
-    }
+.voice-btn:hover{
+    background:#dc2626;
+}
 
-    .search-btn:hover{
-        background:#1d4ed8;
-    }
+.category{
+    margin-top:35px;
+}
 
-    .footer{
-        text-align:center;
-        color:#cbd5e1;
-        margin-top:15px;
-        font-size:13px;
-    }
+.category h2{
+    margin-bottom:15px;
+    color:#93c5fd;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:15px;
+}
+
+.card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    background:rgba(255,255,255,0.15);
+}
+
+.icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#94a3b8;
+    font-size:14px;
+}
 
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<h1>🚀 Rahul Personal Dashboard</h1>
 
-    <h2>🔍 Smart Search Portal</h2>
+<div class="search-container">
 
-    <div class="search-box">
-        <input type="text" id="searchBox" placeholder="यहाँ नंबर दर्ज करें...">
-        <button class="mic-btn" onclick="startVoice()">🎤</button>
-    </div>
+    <input type="text" id="searchInput" placeholder="Google Search करें...">
 
-    <select id="searchEngine">
-        <option value="edistrict">eDistrict Status</option>
-        <option value="varasat">Varasat</option>
-        <option value="bill">Bijli Bill</option>
-    </select>
+    <button class="voice-btn" onclick="startVoice()">
+        🎤
+    </button>
 
-    <button class="search-btn" onclick="searchWeb()">
+    <button class="search-btn" onclick="googleSearch()">
         Search
     </button>
 
-    <div class="footer">
-        Made for Personal Dashboard 🚀
-    </div>
+</div>
+
+
+<!-- Government -->
+
+<div class="category">
+
+<h2>🏛️ Government Services</h2>
+
+<div class="grid">
+
+<a class="card" href="https://edistrict.up.gov.in/" target="_blank">
+<div class="icon">📄</div>
+eDistrict
+</a>
+
+<a class="card" href="https://vaad.up.nic.in/" target="_blank">
+<div class="icon">📜</div>
+Varasat
+</a>
+
+<a class="card" href="https://uidai.gov.in/" target="_blank">
+<div class="icon">🪪</div>
+Aadhaar
+</a>
+
+<a class="card" href="https://www.digilocker.gov.in/" target="_blank">
+<div class="icon">☁️</div>
+DigiLocker
+</a>
 
 </div>
 
+</div>
+
+
+
+<!-- AI Tools -->
+
+<div class="category">
+
+<h2>🤖 AI Tools</h2>
+
+<div class="grid">
+
+<a class="card" href="https://chatgpt.com/" target="_blank">
+<div class="icon">🧠</div>
+ChatGPT
+</a>
+
+<a class="card" href="https://gemini.google.com/" target="_blank">
+<div class="icon">✨</div>
+Gemini
+</a>
+
+<a class="card" href="https://www.canva.com/" target="_blank">
+<div class="icon">🎨</div>
+Canva
+</a>
+
+<a class="card" href="https://remove.bg/" target="_blank">
+<div class="icon">🖼️</div>
+Remove BG
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- Banking -->
+
+<div class="category">
+
+<h2>💰 Banking & Payments</h2>
+
+<div class="grid">
+
+<a class="card" href="https://retail.onlinesbi.sbi/" target="_blank">
+<div class="icon">🏦</div>
+SBI
+</a>
+
+<a class="card" href="https://www.phonepe.com/" target="_blank">
+<div class="icon">📱</div>
+PhonePe
+</a>
+
+<a class="card" href="https://paytm.com/" target="_blank">
+<div class="icon">💳</div>
+Paytm
+</a>
+
+<a class="card" href="https://www.uppclonline.com/" target="_blank">
+<div class="icon">⚡</div>
+Bijli Bill
+</a>
+
+</div>
+
+</div>
+
+
+
+<div class="footer">
+Made with ❤️ for Daily Use
+</div>
+
+
+
 <script>
 
-function searchWeb() {
+function googleSearch(){
 
-    var query = document.getElementById("searchBox").value.trim();
-    var engine = document.getElementById("searchEngine").value;
+    let query = document.getElementById("searchInput").value;
 
-    if(query === ""){
-        alert("कृपया नंबर दर्ज करें");
+    if(query.trim() === ""){
+        alert("कुछ लिखिए");
         return;
     }
 
-    let url = "";
+    let url = "https://www.google.com/search?q=" + encodeURIComponent(query);
 
-    // eDistrict
-    if(engine === "edistrict"){
-        url = "https://edistrict.up.gov.in/edistrict/showStatushome.aspx?application_no=" + encodeURIComponent(query);
-    }
-
-    // Varasat
-    else if(engine === "varasat"){
-        url = "https://vaad.up.nic.in/jaankari_public/SearchGata.aspx";
-    }
-
-    // Bijli Bill
-    else if(engine === "bill"){
-        url = "https://www.uppclonline.com";
-    }
-
-    window.open(url, "_blank");
+    window.open(url,"_blank");
 }
 
 
-// Voice Search
+
 function startVoice(){
 
     if (!('webkitSpeechRecognition' in window)) {
-        alert("आपके ब्राउज़र में Voice Search सपोर्ट नहीं करता");
+
+        alert("Voice Search supported नहीं है");
         return;
     }
 
-    var recognition = new webkitSpeechRecognition();
+    let recognition = new webkitSpeechRecognition();
 
     recognition.lang = "hi-IN";
+
     recognition.start();
 
-    recognition.onresult = function(event) {
+    recognition.onresult = function(event){
 
-        var text = event.results[0][0].transcript;
-        document.getElementById("searchBox").value = text;
+        let text = event.results[0][0].transcript;
 
+        document.getElementById("searchInput").value = text;
     };
 }
 
