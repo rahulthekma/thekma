@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Search Portal</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial,sans-serif;
+    }
+
+    body{
+        background:#0f172a;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+        padding:20px;
+    }
+
+    .container{
+        width:100%;
+        max-width:420px;
+        background:rgba(255,255,255,0.08);
+        backdrop-filter:blur(10px);
+        border:1px solid rgba(255,255,255,0.15);
+        border-radius:22px;
+        padding:25px;
+        box-shadow:0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    h2{
+        color:white;
+        text-align:center;
+        margin-bottom:20px;
+        font-size:24px;
+    }
+
+    .search-box{
+        display:flex;
+        gap:10px;
+        margin-bottom:15px;
+    }
+
+    input{
+        flex:1;
+        padding:14px;
+        border:none;
+        border-radius:14px;
+        outline:none;
+        font-size:16px;
+    }
+
+    button{
+        border:none;
+        cursor:pointer;
+        border-radius:14px;
+        padding:0 16px;
+        font-size:18px;
+        transition:0.3s;
+    }
+
+    .mic-btn{
+        background:#ef4444;
+        color:white;
+    }
+
+    .mic-btn:hover{
+        background:#dc2626;
+    }
+
+    select{
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:14px;
+        margin-bottom:15px;
+        font-size:16px;
+        outline:none;
+    }
+
+    .search-btn{
+        width:100%;
+        padding:14px;
+        background:#2563eb;
+        color:white;
+        font-size:18px;
+        font-weight:bold;
+    }
+
+    .search-btn:hover{
+        background:#1d4ed8;
+    }
+
+    .footer{
+        text-align:center;
+        color:#cbd5e1;
+        margin-top:15px;
+        font-size:13px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🔍 Smart Search Portal</h2>
+
+    <div class="search-box">
+        <input type="text" id="searchBox" placeholder="यहाँ नंबर दर्ज करें...">
+        <button class="mic-btn" onclick="startVoice()">🎤</button>
+    </div>
+
+    <select id="searchEngine">
+        <option value="edistrict">eDistrict Status</option>
+        <option value="varasat">Varasat</option>
+        <option value="bill">Bijli Bill</option>
+    </select>
+
+    <button class="search-btn" onclick="searchWeb()">
+        Search
+    </button>
+
+    <div class="footer">
+        Made for Personal Dashboard 🚀
+    </div>
+
+</div>
+
+<script>
+
+function searchWeb() {
+
+    var query = document.getElementById("searchBox").value.trim();
+    var engine = document.getElementById("searchEngine").value;
+
+    if(query === ""){
+        alert("कृपया नंबर दर्ज करें");
+        return;
+    }
+
+    let url = "";
+
+    // eDistrict
+    if(engine === "edistrict"){
+        url = "https://edistrict.up.gov.in/edistrict/showStatushome.aspx?application_no=" + encodeURIComponent(query);
+    }
+
+    // Varasat
+    else if(engine === "varasat"){
+        url = "https://vaad.up.nic.in/jaankari_public/SearchGata.aspx";
+    }
+
+    // Bijli Bill
+    else if(engine === "bill"){
+        url = "https://www.uppclonline.com";
+    }
+
+    window.open(url, "_blank");
+}
+
+
+// Voice Search
+function startVoice(){
+
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("आपके ब्राउज़र में Voice Search सपोर्ट नहीं करता");
+        return;
+    }
+
+    var recognition = new webkitSpeechRecognition();
+
+    recognition.lang = "hi-IN";
+    recognition.start();
+
+    recognition.onresult = function(event) {
+
+        var text = event.results[0][0].transcript;
+        document.getElementById("searchBox").value = text;
+
+    };
+}
+
+</script>
+
+</body>
+</html>
