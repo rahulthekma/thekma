@@ -10,7 +10,100 @@
 <title>Rahul Gupta Janseva Kendra</title>
 
 <style>
+/* STYLISH RELAXING HEADER */
 
+.mainHeader{
+position:relative;
+max-width:1100px;
+margin:0 auto 35px auto;
+padding:35px 20px;
+border-radius:30px;
+text-align:center;
+overflow:hidden;
+
+background:linear-gradient(
+135deg,
+#dbeafe,
+#e0f2fe,
+#ede9fe
+);
+
+color:#1e293b;
+
+box-shadow:0 10px 30px rgba(148,163,184,0.25);
+}
+
+.mainHeader h1{
+font-size:42px;
+margin-bottom:12px;
+font-weight:700;
+letter-spacing:1px;
+position:relative;
+z-index:2;
+color:#1e3a8a;
+}
+
+.mainHeader p{
+font-size:16px;
+opacity:0.9;
+position:relative;
+z-index:2;
+color:#475569;
+}
+
+.headerGlow{
+position:absolute;
+width:350px;
+height:350px;
+
+background:rgba(255,255,255,0.45);
+
+border-radius:50%;
+top:-120px;
+right:-80px;
+
+filter:blur(10px);
+
+animation:floatGlow 6s infinite ease-in-out;
+}
+
+@keyframes floatGlow{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(20px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.mainHeader{
+padding:28px 15px;
+border-radius:25px;
+}
+
+.mainHeader h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.mainHeader p{
+font-size:14px;
+}
+
+}
 *{
 margin:0;
 padding:0;
@@ -131,6 +224,10 @@ text-decoration:none;
 color:#1e293b;
 transition:0.3s;
 box-shadow:0 4px 15px rgba(0,0,0,0.08);
+cursor:pointer;
+border:none;
+width:100%;
+font-size:16px;
 }
 
 .card:hover{
@@ -148,6 +245,88 @@ text-align:center;
 margin-top:40px;
 color:#64748b;
 font-size:14px;
+}
+
+
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+z-index:999;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.modalContent{
+background:white;
+width:100%;
+max-width:700px;
+padding:25px;
+border-radius:20px;
+animation:popup 0.25s ease;
+}
+
+@keyframes popup{
+
+from{
+transform:scale(0.8);
+opacity:0;
+}
+
+to{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+.modalHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.closeBtn{
+font-size:35px;
+cursor:pointer;
+font-weight:bold;
+color:#555;
+}
+
+.closeBtn:hover{
+color:red;
+}
+
+.modalGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:15px;
+}
+
+.modalCard{
+background:#f8fafc;
+padding:20px;
+border-radius:18px;
+text-align:center;
+text-decoration:none;
+color:#111827;
+font-weight:bold;
+transition:0.3s;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.modalCard:hover{
+transform:translateY(-5px);
+background:#ede9fe;
 }
 
 
@@ -174,9 +353,21 @@ width:100%;
 
 <body>
 
+<!-- STYLISH HEADER -->
+
+<div class="mainHeader">
+
+<div class="headerGlow"></div>
+
 <h1>
-Rahul Gupta Janseva Kendra
+🏛️ Rahul Gupta Janseva Kendra
 </h1>
+
+<p>
+All CSC Services • Government Work • AI Tools • Education
+</p>
+
+</div>
 
 
 
@@ -294,17 +485,31 @@ eDistrict
 
 <a
 class="card"
-href="https://ewallet.uppcl.org/SSO?agencyCode=U2FsdGVkX1%2BcN8yyijeSdhX%2FJYMe%2FPH5Iyt6%2Blm7MD5B8HkZc5%2BLYnlnuBdvi8PuYDYTILg40eBSlQB7aAUXkWe0dXMGhMRHPXdYwsLOWOkIjzhZ0DRncI6oB3RsBUo7&agencyName=CSC&agentMobile=9889614246"
+href="https://retail.sahaj.co.in/web/retail/home"
 target="_blank"
 >
 
 <div class="icon">
-⚡
+🛒
 </div>
 
-Electric Bill
+Sahaj
 
 </a>
+
+<button
+class="card"
+onclick="openAadhaarModal()"
+type="button"
+>
+
+<div class="icon">
+⌨
+</div>
+
+Aadhaar
+
+</button>
 
 <a
 class="card"
@@ -322,15 +527,29 @@ Farmer Registry
 
 <a
 class="card"
-href="https://myaadhaar.uidai.gov.in/"
+href="https://upbhulekh.gov.in/"
 target="_blank"
 >
 
 <div class="icon">
-🆔
+🌎
 </div>
 
-Aadhaar
+Khatauni
+
+</a>
+
+<a
+class="card"
+href="https://egovcsc.csccloud.in/nsdl/"
+target="_blank"
+>
+
+<div class="icon">
+💳
+</div>
+
+PAN Card
 
 </a>
 
@@ -352,15 +571,15 @@ Aadhaar
 
 <a
 class="card"
-href="https://chatgpt.com/"
+href="https://online2pdf.com/"
 target="_blank"
 >
 
 <div class="icon">
-🧠
+📝
 </div>
 
-ChatGPT
+PDF Tool
 
 </a>
 
@@ -412,43 +631,47 @@ Remove BG
 
 
 
-<!-- BANKING -->
+<!-- EDUCATIONAL SERVICES -->
 
 <div class="category">
 
 <h2>
-💰 Banking & Payments
+📖 Educational Services
 </h2>
 
 <div class="grid">
 
 <a
 class="card"
-href="https://retail.onlinesbi.sbi/"
+href="https://www.sarkariresult.com/"
 target="_blank"
 >
 
 <div class="icon">
-🏦
+📖
 </div>
 
-SBI
+Sarkari Result
 
 </a>
 
-<a
+
+
+<button
 class="card"
-href="https://www.phonepe.com/"
-target="_blank"
+onclick="openUniversityModal()"
+type="button"
 >
 
 <div class="icon">
-📱
+🎓
 </div>
 
-PhonePe
+MSDSU Azamgarh
 
-</a>
+</button>
+
+
 
 <a
 class="card"
@@ -471,7 +694,191 @@ Paytm
 
 
 <div class="footer">
-Made with ❤️ for Daily Use
+Made with ❤️ for CSC Use
+</div>
+
+
+
+<!-- UNIVERSITY MODAL -->
+
+<div
+id="universityModal"
+class="modal"
+>
+
+<div class="modalContent">
+
+<div class="modalHeader">
+
+<h2>
+🎓 Maharaja Suhel Dev University Azamgarh
+</h2>
+
+<span
+class="closeBtn"
+onclick="closeUniversityModal()"
+>
+×
+</span>
+
+</div>
+
+
+
+<div class="modalGrid">
+
+<a
+class="modalCard"
+href="https://msdsu.ac.in/"
+target="_blank"
+>
+
+<div class="icon">
+🏠
+</div>
+
+Home
+
+</a>
+
+<a
+class="modalCard"
+href="https://msdsuonline.in/"
+target="_blank"
+>
+
+<div class="icon">
+📝
+</div>
+
+Exam Form
+
+</a>
+
+<a
+class="modalCard"
+href="https://msduexam.co.in/"
+target="_blank"
+>
+
+<div class="icon">
+📄
+</div>
+
+Results
+
+</a>
+
+<a
+class="modalCard"
+href="https://msdsu.samarth.edu.in/index.php/site/login"
+target="_blank"
+>
+
+<div class="icon">
+🎫
+</div>
+
+Samarth Login
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- AADHAAR MODAL -->
+
+<div
+id="aadhaarModal"
+class="modal"
+>
+
+<div class="modalContent">
+
+<div class="modalHeader">
+
+<h2>
+⌨ Aadhaar Services
+</h2>
+
+<span
+class="closeBtn"
+onclick="closeAadhaarModal()"
+>
+×
+</span>
+
+</div>
+
+
+
+<div class="modalGrid">
+
+<a
+class="modalCard"
+href="https://myaadhaar.uidai.gov.in/"
+target="_blank"
+>
+
+<div class="icon">
+🏠
+</div>
+
+Aadhaar Login
+
+</a>
+
+<a
+class="modalCard"
+href="https://myaadhaar.uidai.gov.in/check-aadhaar-validity/en"
+target="_blank"
+>
+
+<div class="icon">
+📲
+</div>
+
+Linked Mobile
+
+</a>
+
+<a
+class="modalCard"
+href="https://myaadhaar.uidai.gov.in/CheckAadhaarStatus/en"
+target="_blank"
+>
+
+<div class="icon">
+🔍
+</div>
+
+Check Status 
+
+</a>
+
+<a
+class="modalCard"
+href="https://myaadhaar.uidai.gov.in/genricDownloadAadhaar/en"
+target="_blank"
+>
+
+<div class="icon">
+⮟
+</div>
+
+Download Aadhaar
+
+</a>
+
+</div>
+
+</div>
+
 </div>
 
 
@@ -488,31 +895,68 @@ voices = window.speechSynthesis.getVoices();
 
 
 
-/* NUMBER TO HINDI */
+/* ENTER KEY SUPPORT */
 
-function convertNumberToHindi(number){
+document.getElementById("number").addEventListener("keypress", function(event){
 
-const hindiDigits = {
+if(event.key === "Enter"){
 
-'0':'०',
-'1':'१',
-'2':'२',
-'3':'३',
-'4':'४',
-'5':'५',
-'6':'६',
-'7':'७',
-'8':'८',
-'9':'९'
+checkStatus();
+
+}
+
+});
+
+
+
+/* AUTO FOCUS */
+
+window.onload = function(){
+
+document.getElementById("number").focus();
 
 };
 
-return number
-.split('')
-.map(digit => hindiDigits[digit] || digit)
-.join(' ');
+
+
+/* PLACEHOLDER CHANGE */
+
+document.getElementById("service").addEventListener("change", function(){
+
+const service = this.value;
+
+const input =
+document.getElementById("number");
+
+if(service === "electric"){
+
+input.placeholder =
+"Enter Electricity Account Number";
 
 }
+
+else if(service === "edistrict"){
+
+input.placeholder =
+"Enter Application Number";
+
+}
+
+else if(service === "varasat"){
+
+input.placeholder =
+"Enter Case Number";
+
+}
+
+else if(service === "google"){
+
+input.placeholder =
+"Search anything on Google...";
+
+}
+
+});
 
 
 
@@ -526,11 +970,9 @@ document.getElementById("number").value.trim();
 const service =
 document.getElementById("service").value;
 
-
-
 if(number === ""){
 
-alert("कृपया नंबर या Google Search लिखें");
+alert("Please enter something");
 
 return;
 
@@ -558,12 +1000,8 @@ return;
 /* STATUS SERVICES */
 
 let url = "";
-let serviceName = "";
 
 if(service === "electric"){
-
-serviceName =
-"बिजली बिल स्थिति";
 
 url =
 "https://consumer.uppcl.org/wss/pay_bill?kno="
@@ -576,9 +1014,6 @@ encodeURIComponent(number)
 
 else if(service === "edistrict"){
 
-serviceName =
-"ई डिस्ट्रिक्ट प्रमाण पत्र स्थिति";
-
 url =
 "https://edistrict.up.gov.in/edistrict/showStatushome.aspx?application_no="
 +
@@ -588,11 +1023,8 @@ encodeURIComponent(number);
 
 else if(service === "varasat"){
 
-serviceName =
-"वरासत केस स्थिति";
-
 url =
-"https://rccms.up.gov.in/Varasat/Print_Order?case_autonogen="
+"https://vaad.up.nic.in/KhaPu_User/P11_Applicant_Details.aspx?case_auto_nogen="
 +
 encodeURIComponent(number);
 
@@ -600,46 +1032,41 @@ encodeURIComponent(number);
 
 window.open(url, "_blank");
 
-speakStatus(serviceName, number);
+speakStatus(number);
 
 }
 
 
 
-/* HINDI VOICE */
+/* ENGLISH VOICE */
 
-function speakStatus(serviceName, number){
-
-const hindiNumber =
-convertNumberToHindi(number);
+function speakStatus(number){
 
 const message =
-"राहुल सर, "
+"Please recheck the numbers. Your entered number is "
 +
-serviceName
-+
-" पोर्टल पर मैं जांच कर रही हूँ। कृपया नम्बर एक बार मिला लीजिये। आपका दर्ज नम्बर है "
-+
-hindiNumber;
+number.split('').join(' ');
 
 const speech =
 new SpeechSynthesisUtterance(message);
 
-speech.lang = "hi-IN";
+speech.lang = "en-US";
 
 speech.rate = 1.15;
 
 speech.pitch = 1;
 
-const kalpanaVoice = voices.find(voice =>
+const englishVoice = voices.find(voice =>
 
-voice.name === "Microsoft Kalpana - Hindi (India)"
+voice.name.includes("Microsoft")
+&&
+voice.lang.includes("en")
 
 );
 
-if(kalpanaVoice){
+if(englishVoice){
 
-speech.voice = kalpanaVoice;
+speech.voice = englishVoice;
 
 }
 
@@ -648,6 +1075,68 @@ window.speechSynthesis.cancel();
 window.speechSynthesis.speak(speech);
 
 }
+
+
+
+/* UNIVERSITY MODAL */
+
+function openUniversityModal(){
+
+document.getElementById("universityModal").style.display =
+"flex";
+
+}
+
+function closeUniversityModal(){
+
+document.getElementById("universityModal").style.display =
+"none";
+
+}
+
+
+
+/* AADHAAR MODAL */
+
+function openAadhaarModal(){
+
+document.getElementById("aadhaarModal").style.display =
+"flex";
+
+}
+
+function closeAadhaarModal(){
+
+document.getElementById("aadhaarModal").style.display =
+"none";
+
+}
+
+
+
+/* CLOSE OUTSIDE CLICK */
+
+window.onclick = function(event){
+
+const universityModal =
+document.getElementById("universityModal");
+
+const aadhaarModal =
+document.getElementById("aadhaarModal");
+
+if(event.target === universityModal){
+
+universityModal.style.display = "none";
+
+}
+
+if(event.target === aadhaarModal){
+
+aadhaarModal.style.display = "none";
+
+}
+
+};
 
 </script>
 
