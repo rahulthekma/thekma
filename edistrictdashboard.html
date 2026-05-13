@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+</div>
+
+<!-- ACTIONS -->
+
+<div class="actionBar">
+
+<input type="text" id="searchInput" placeholder="Search customer..." onkeyup="searchRecords()">
+
+<button onclick="openModal()">➕ Add Record</button>
+
+<button onclick="exportCSV()">📥 Export CSV</button>
+
+<button onclick="window.print()">🖨 Print</button>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="tableContainer">
+
+<table>
+
+<thead>
+<tr>
+<th>SR</th>
+<th>Name</th>
+<th>Mobile</th>
+<th>Service</th>
+<th>Date</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody id="recordTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modalContent">
+
+<div class="modalHeader">
+<h2>Add Customer Record</h2>
+<span onclick="closeModal()">×</span>
+</div>
+
+<input type="hidden" id="editIndex">
+
+<input type="text" id="name" class="formInput" placeholder="Customer Name">
+
+<input type="text" id="mobile" class="formInput" placeholder="Mobile Number">
+
+<select id="service" class="formInput">
+<option value="">Select Service</option>
+<option>Aadhaar</option>
+<option>PAN Card</option>
+<option>Income Certificate</option>
+<option>Caste Certificate</option>
+<option>Domicile</option>
+<option>Electric Bill</option>
+<option>PM Kisan</option>
+</select>
+
+<button onclick="saveRecord()">Save Record</button>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
