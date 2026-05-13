@@ -1,18 +1,135 @@
 <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CSC Dashboard</title>
+
+<link rel="stylesheet" href="edistrictdashboard.css">
+
+</head>
+
+<body>
+
+<!-- LOGIN SCREEN -->
+
+<div class="loginContainer" id="loginContainer">
+
+<div class="loginBox">
+
+<h1>
+🔐 CSC Dashboard Login
+</h1>
+
+<input
+type="text"
+id="loginId"
+placeholder="Enter Login ID"
+>
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Enter Password"
+>
+
+<button onclick="login()">
+Login
+</button>
+
+<p id="loginError"></p>
 
 </div>
 
-<!-- ACTIONS -->
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboard" style="display:none;">
+
+<header>
+
+<h1>
+🏛️ CSC Customer Dashboard
+</h1>
+
+<div class="topInfo">
+
+<div id="clock"></div>
+
+<div id="internetStatus"></div>
+
+</div>
+
+</header>
+
+<!-- STATS -->
+
+<div class="statsGrid">
+
+<div class="statCard">
+
+<h2 id="totalRecords">
+0
+</h2>
+
+<p>
+Total Records
+</p>
+
+</div>
+
+<div class="statCard">
+
+<h2 id="todayRecords">
+0
+</h2>
+
+<p>
+Today's Records
+</p>
+
+</div>
+
+<div class="statCard">
+
+<h2 id="totalServices">
+0
+</h2>
+
+<p>
+Total Services
+</p>
+
+</div>
+
+</div>
+
+<!-- ACTION BAR -->
 
 <div class="actionBar">
 
-<input type="text" id="searchInput" placeholder="Search customer..." onkeyup="searchRecords()">
+<input
+type="text"
+id="searchInput"
+placeholder="Search customer..."
+onkeyup="searchRecords()"
+>
 
-<button onclick="openModal()">➕ Add Record</button>
+<button onclick="openModal()">
+➕ Add Record
+</button>
 
-<button onclick="exportCSV()">📥 Export CSV</button>
+<button onclick="exportCSV()">
+📥 Export CSV
+</button>
 
-<button onclick="window.print()">🖨 Print</button>
+<button onclick="window.print()">
+🖨 Print
+</button>
 
 </div>
 
@@ -23,17 +140,23 @@
 <table>
 
 <thead>
+
 <tr>
+
 <th>SR</th>
 <th>Name</th>
 <th>Mobile</th>
 <th>Service</th>
 <th>Date</th>
 <th>Actions</th>
+
 </tr>
+
 </thead>
 
-<tbody id="recordTable"></tbody>
+<tbody id="recordTable">
+
+</tbody>
 
 </table>
 
@@ -48,26 +171,78 @@
 <div class="modalContent">
 
 <div class="modalHeader">
-<h2>Add Customer Record</h2>
-<span onclick="closeModal()">×</span>
+
+<h2>
+Add Customer Record
+</h2>
+
+<span onclick="closeModal()">
+×
+</span>
+
 </div>
 
-<input type="hidden" id="editIndex">
+<input
+type="hidden"
+id="editIndex"
+>
 
-<input type="text" id="name" class="formInput" placeholder="Customer Name">
+<input
+type="text"
+id="name"
+class="formInput"
+placeholder="Customer Name"
+>
 
-<input type="text" id="mobile" class="formInput" placeholder="Mobile Number">
+<input
+type="text"
+id="mobile"
+class="formInput"
+placeholder="Mobile Number"
+>
 
-<select id="service" class="formInput">
-<option value="">Select Service</option>
-<option>Aadhaar</option>
-<option>PAN Card</option>
-<option>Income Certificate</option>
-<option>Caste Certificate</option>
-<option>Domicile</option>
+<select
+id="service"
+class="formInput"
+>
+
+<option value="">
+Select Service
+</option>
+
+<option>
+Aadhaar
+</option>
+
+<option>
+PAN Card
+</option>
+
+<option>
+Income Certificate
+</option>
+
+<option>
+Caste Certificate
+</option>
+
+<option>
+Domicile
+</option>
+
+<option>
+Electric Bill
+</option>
+
+<option>
+PM Kisan
+</option>
+
 </select>
 
-<button onclick="saveRecord()">Save Record</button>
+<button onclick="saveRecord()">
+Save Record
+</button>
 
 </div>
 
@@ -76,4 +251,5 @@
 <script src="edistrictdashboard.js"></script>
 
 </body>
+
 </html>
