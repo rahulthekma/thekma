@@ -1,359 +1,15 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="hi">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Rahul Gupta Janseva Kendra</title>
 
-<style>
-
-/* STYLISH RELAXING HEADER */
-
-.mainHeader{
-position:relative;
-max-width:1100px;
-margin:0 auto 35px auto;
-padding:35px 20px;
-border-radius:30px;
-text-align:center;
-overflow:hidden;
-
-background:linear-gradient(
-135deg,
-#dbeafe,
-#e0f2fe,
-#ede9fe
-);
-
-color:#1e293b;
-
-box-shadow:0 10px 30px rgba(148,163,184,0.25);
-}
-
-.mainHeader h1{
-font-size:42px;
-margin-bottom:12px;
-font-weight:700;
-letter-spacing:1px;
-position:relative;
-z-index:2;
-color:#1e3a8a;
-}
-
-.mainHeader p{
-font-size:16px;
-opacity:0.9;
-position:relative;
-z-index:2;
-color:#475569;
-}
-
-.headerGlow{
-position:absolute;
-width:350px;
-height:350px;
-
-background:rgba(255,255,255,0.45);
-
-border-radius:50%;
-top:-120px;
-right:-80px;
-
-filter:blur(10px);
-
-animation:floatGlow 6s infinite ease-in-out;
-}
-
-@keyframes floatGlow{
-
-0%{
-transform:translateY(0px);
-}
-
-50%{
-transform:translateY(20px);
-}
-
-100%{
-transform:translateY(0px);
-}
-
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.mainHeader{
-padding:28px 15px;
-border-radius:25px;
-}
-
-.mainHeader h1{
-font-size:28px;
-line-height:1.4;
-}
-
-.mainHeader p{
-font-size:14px;
-}
-
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#f1f5f9;
-color:#1e293b;
-min-height:100vh;
-padding:20px;
-}
-
-h1{
-text-align:center;
-margin-bottom:25px;
-font-size:32px;
-color:#0f172a;
-}
-
-/* STATUS SECTION */
-
-.statusContainer{
-max-width:1100px;
-margin:0 auto 30px auto;
-background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 4px 15px rgba(0,0,0,0.08);
-}
-
-.formRow{
-display:flex;
-gap:15px;
-align-items:end;
-flex-wrap:wrap;
-}
-
-.inputGroup{
-flex:2;
-min-width:250px;
-}
-
-.selectGroup{
-flex:1.5;
-min-width:220px;
-}
-
-.buttonGroup{
-flex:1;
-min-width:180px;
-}
-
-label{
-display:block;
-font-weight:bold;
-margin-bottom:10px;
-font-size:15px;
-}
-
-.statusInput,
-.statusSelect{
-width:100%;
-padding:15px;
-border:none;
-border-radius:15px;
-font-size:16px;
-outline:none;
-background:#f8fafc;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-.statusBtn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:15px;
-cursor:pointer;
-font-size:16px;
-background:#2563eb;
-color:white;
-transition:0.3s;
-font-weight:bold;
-}
-
-.statusBtn:hover{
-background:#1d4ed8;
-}
-
-/* CATEGORY */
-
-.category{
-margin-top:35px;
-}
-
-.category h2{
-margin-bottom:15px;
-color:#2563eb;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:15px;
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:20px;
-text-align:center;
-text-decoration:none;
-color:#1e293b;
-transition:0.3s;
-box-shadow:0 4px 15px rgba(0,0,0,0.08);
-cursor:pointer;
-border:none;
-width:100%;
-font-size:16px;
-}
-
-.card:hover{
-transform:translateY(-5px);
-background:#eff6ff;
-}
-
-.icon{
-font-size:35px;
-margin-bottom:10px;
-display:flex;
-justify-content:center;
-align-items:center;
-height:45px;
-}
-
-/* CSC LOGO FIX */
-
-.icon img{
-width:40px;
-height:40px;
-object-fit:contain;
-display:block;
-margin:auto;
-}
-
-.footer{
-text-align:center;
-margin-top:40px;
-color:#64748b;
-font-size:14px;
-}
-
-/* MODAL */
-
-.modal{
-display:none;
-position:fixed;
-z-index:999;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-justify-content:center;
-align-items:center;
-padding:20px;
-}
-
-.modalContent{
-background:white;
-width:100%;
-max-width:700px;
-padding:25px;
-border-radius:20px;
-animation:popup 0.25s ease;
-}
-
-@keyframes popup{
-
-from{
-transform:scale(0.8);
-opacity:0;
-}
-
-to{
-transform:scale(1);
-opacity:1;
-}
-
-}
-
-.modalHeader{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-}
-
-.closeBtn{
-font-size:35px;
-cursor:pointer;
-font-weight:bold;
-color:#555;
-}
-
-.closeBtn:hover{
-color:red;
-}
-
-.modalGrid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-gap:15px;
-}
-
-.modalCard{
-background:#f8fafc;
-padding:20px;
-border-radius:18px;
-text-align:center;
-text-decoration:none;
-color:#111827;
-font-weight:bold;
-transition:0.3s;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
-}
-
-.modalCard:hover{
-transform:translateY(-5px);
-background:#ede9fe;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.formRow{
-flex-direction:column;
-}
-
-.inputGroup,
-.selectGroup,
-.buttonGroup{
-width:100%;
-}
-
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -457,6 +113,7 @@ Search / Check
 class="card"
 href="https://digitalseva.csc.gov.in"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -471,10 +128,11 @@ CSC
 class="card"
 href="https://edistrict.up.gov.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
-📄
+<img src="images/edistrict.webp" alt="Edistrict Logo">
 </div>
 
 eDistrict
@@ -485,10 +143,11 @@ eDistrict
 class="card"
 href="https://retail.sahaj.co.in/web/retail/home"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
-🛒
+<img src="images/sahaj.webp" alt="Sahaj Logo">
 </div>
 
 Sahaj
@@ -499,10 +158,11 @@ Sahaj
 class="card"
 href="https://ewallet.uppcl.org/SSO?agencyCode=U2FsdGVkX1%2BcN8yyijeSdhX%2FJYMe%2FPH5Iyt6%2Blm7MD5B8HkZc5%2BLYnlnuBdvi8PuYDYTILg40eBSlQB7aAUXkWe0dXMGhMRHPXdYwsLOWOkIjzhZ0DRncI6oB3RsBUo7&agencyName=CSC&agentMobile=9889614246"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
-⚡
+<img src="images/electric.webp" alt="Electric Logo">
 </div>
 
 Electric Bill
@@ -527,10 +187,11 @@ Aadhaar
 class="card"
 href="https://upfr.agristack.gov.in/farmer-registry-up/#/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
-🌾
+<img src="images/agristac.webp" alt="Agristack Logo">
 </div>
 
 Farmer Registry
@@ -541,10 +202,11 @@ Farmer Registry
 class="card"
 href="https://upbhulekh.gov.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
-🌎
+<img src="images/bhulekh.webp" alt="Bhulekh Logo">
 </div>
 
 Khatauni
@@ -555,10 +217,11 @@ Khatauni
 class="card"
 href="https://egovcsc.csccloud.in/nsdl/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
-💳
+<img src="images/pan.webp" alt="PAN Logo">
 </div>
 
 PAN Card
@@ -569,7 +232,7 @@ PAN Card
 
 </div>
 
-<!-- Farmer Related Services -->
+<!-- FARMER SERVICES -->
 
 <div class="category">
 
@@ -583,6 +246,7 @@ PAN Card
 class="card"
 href="https://pmkisan.gov.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -597,6 +261,7 @@ PM Kisan
 class="card"
 href="https://eproc.up.gov.in/paddy2324/Uparjan/FarmerRegLogin.aspx"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -611,6 +276,7 @@ FCS Sell
 class="card"
 href="https://agridarshan.up.gov.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -625,6 +291,7 @@ Agridarshan
 class="card"
 href="https://bor.up.nic.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -653,10 +320,11 @@ Board of Revenue
 class="card"
 href="https://online2pdf.com/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
-📝
+<img src="images/pdf.webp" alt="PDF Logo">
 </div>
 
 PDF Tool
@@ -667,6 +335,7 @@ PDF Tool
 class="card"
 href="https://gemini.google.com/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -681,6 +350,7 @@ Gemini
 class="card"
 href="https://www.canva.com/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -695,10 +365,11 @@ Canva
 class="card"
 href="https://remove.bg/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
-🖼️
+<img src="images/removebg.webp" alt="Remove BG Logo">
 </div>
 
 Remove BG
@@ -723,6 +394,7 @@ Remove BG
 class="card"
 href="https://www.sarkariresult.com/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -751,6 +423,7 @@ MSDSU Azamgarh
 class="card"
 href="https://paytm.com/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -799,6 +472,7 @@ onclick="closeUniversityModal()"
 class="modalCard"
 href="https://msdsu.ac.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -813,6 +487,7 @@ Home
 class="modalCard"
 href="https://msdsuonline.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -827,6 +502,7 @@ Exam Form
 class="modalCard"
 href="https://msduexam.co.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -841,6 +517,7 @@ Results
 class="modalCard"
 href="https://msdsu.samarth.edu.in/index.php/site/login"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -887,6 +564,7 @@ onclick="closeAadhaarModal()"
 class="modalCard"
 href="https://myaadhaar.uidai.gov.in/"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -901,6 +579,7 @@ Aadhaar Login
 class="modalCard"
 href="https://myaadhaar.uidai.gov.in/check-aadhaar-validity/en"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -915,6 +594,7 @@ Linked Mobile
 class="modalCard"
 href="https://myaadhaar.uidai.gov.in/CheckAadhaarStatus/en"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -929,6 +609,7 @@ Check Status
 class="modalCard"
 href="https://myaadhaar.uidai.gov.in/genricDownloadAadhaar/en"
 target="_blank"
+rel="noopener noreferrer"
 >
 
 <div class="icon">
@@ -945,242 +626,7 @@ Download Aadhaar
 
 </div>
 
-<script>
-
-let voices = [];
-
-window.speechSynthesis.onvoiceschanged = () => {
-
-voices = window.speechSynthesis.getVoices();
-
-};
-
-/* ENTER KEY SUPPORT */
-
-document.getElementById("number").addEventListener("keypress", function(event){
-
-if(event.key === "Enter"){
-
-checkStatus();
-
-}
-
-});
-
-/* AUTO FOCUS */
-
-window.onload = function(){
-
-document.getElementById("number").focus();
-
-};
-
-/* PLACEHOLDER CHANGE */
-
-document.getElementById("service").addEventListener("change", function(){
-
-const service = this.value;
-
-const input =
-document.getElementById("number");
-
-if(service === "electric"){
-
-input.placeholder =
-"Enter Electricity Account Number";
-
-}
-
-else if(service === "edistrict"){
-
-input.placeholder =
-"Enter Application Number";
-
-}
-
-else if(service === "varasat"){
-
-input.placeholder =
-"Enter Case Number";
-
-}
-
-else if(service === "google"){
-
-input.placeholder =
-"Search anything on Google...";
-
-}
-
-});
-
-/* MAIN FUNCTION */
-
-function checkStatus(){
-
-const number =
-document.getElementById("number").value.trim();
-
-const service =
-document.getElementById("service").value;
-
-if(number === ""){
-
-alert("Please enter something");
-
-return;
-
-}
-
-/* GOOGLE SEARCH */
-
-if(service === "google"){
-
-const googleUrl =
-"https://www.google.com/search?q="
-+
-encodeURIComponent(number);
-
-window.open(googleUrl, "_blank");
-
-return;
-
-}
-
-/* STATUS SERVICES */
-
-let url = "";
-
-if(service === "electric"){
-
-url =
-"https://consumer.uppcl.org/wss/pay_bill?kno="
-+
-encodeURIComponent(number)
-+
-"&discom=PUVNL";
-
-}
-
-else if(service === "edistrict"){
-
-url =
-"https://edistrict.up.gov.in/edistrict/showStatushome.aspx?application_no="
-+
-encodeURIComponent(number);
-
-}
-
-else if(service === "varasat"){
-
-url =
-"https://vaad.up.nic.in/KhaPu_User/P11_Applicant_Details.aspx?case_auto_nogen="
-+
-encodeURIComponent(number);
-
-}
-
-window.open(url, "_blank");
-
-speakStatus(number);
-
-}
-
-/* ENGLISH VOICE */
-
-function speakStatus(number){
-
-const message =
-"Please recheck the numbers. Your entered number is "
-+
-number.split('').join(' ');
-
-const speech =
-new SpeechSynthesisUtterance(message);
-
-speech.lang = "en-US";
-
-speech.rate = 1.15;
-
-speech.pitch = 1;
-
-const englishVoice = voices.find(voice =>
-
-voice.name.includes("Microsoft")
-&&
-voice.lang.includes("en")
-
-);
-
-if(englishVoice){
-
-speech.voice = englishVoice;
-
-}
-
-window.speechSynthesis.cancel();
-
-window.speechSynthesis.speak(speech);
-
-}
-
-/* UNIVERSITY MODAL */
-
-function openUniversityModal(){
-
-document.getElementById("universityModal").style.display =
-"flex";
-
-}
-
-function closeUniversityModal(){
-
-document.getElementById("universityModal").style.display =
-"none";
-
-}
-
-/* AADHAAR MODAL */
-
-function openAadhaarModal(){
-
-document.getElementById("aadhaarModal").style.display =
-"flex";
-
-}
-
-function closeAadhaarModal(){
-
-document.getElementById("aadhaarModal").style.display =
-"none";
-
-}
-
-/* CLOSE OUTSIDE CLICK */
-
-window.onclick = function(event){
-
-const universityModal =
-document.getElementById("universityModal");
-
-const aadhaarModal =
-document.getElementById("aadhaarModal");
-
-if(event.target === universityModal){
-
-universityModal.style.display = "none";
-
-}
-
-if(event.target === aadhaarModal){
-
-aadhaarModal.style.display = "none";
-
-}
-
-};
-
-</script>
+<script src="script.js"></script>
 
 </body>
 
