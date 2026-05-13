@@ -21,13 +21,16 @@ padding:35px 20px;
 border-radius:30px;
 text-align:center;
 overflow:hidden;
+
 background:linear-gradient(
 135deg,
 #dbeafe,
 #e0f2fe,
 #ede9fe
 );
+
 color:#1e293b;
+
 box-shadow:0 10px 30px rgba(148,163,184,0.25);
 }
 
@@ -53,11 +56,15 @@ color:#475569;
 position:absolute;
 width:350px;
 height:350px;
+
 background:rgba(255,255,255,0.45);
+
 border-radius:50%;
 top:-120px;
 right:-80px;
+
 filter:blur(10px);
+
 animation:floatGlow 6s infinite ease-in-out;
 }
 
@@ -217,7 +224,6 @@ cursor:pointer;
 border:none;
 width:100%;
 font-size:16px;
-font-weight:600;
 }
 
 .card:hover{
@@ -241,7 +247,7 @@ width:40px;
 height:40px;
 object-fit:contain;
 display:block;
-margin:0 auto;
+margin:auto;
 }
 
 .footer{
@@ -491,7 +497,7 @@ Sahaj
 
 <a
 class="card"
-href="https://ewallet.uppcl.org/"
+href="https://ewallet.uppcl.org/SSO?agencyCode=U2FsdGVkX1%2BcN8yyijeSdhX%2FJYMe%2FPH5Iyt6%2Blm7MD5B8HkZc5%2BLYnlnuBdvi8PuYDYTILg40eBSlQB7aAUXkWe0dXMGhMRHPXdYwsLOWOkIjzhZ0DRncI6oB3RsBUo7&agencyName=CSC&agentMobile=9889614246"
 target="_blank"
 >
 
@@ -503,6 +509,258 @@ Electric Bill
 
 </a>
 
+<button
+class="card"
+onclick="openAadhaarModal()"
+type="button"
+>
+
+<div class="icon">
+⌨
+</div>
+
+Aadhaar
+
+</button>
+
+<a
+class="card"
+href="https://upfr.agristack.gov.in/farmer-registry-up/#/"
+target="_blank"
+>
+
+<div class="icon">
+🌾
+</div>
+
+Farmer Registry
+
+</a>
+
+<a
+class="card"
+href="https://upbhulekh.gov.in/"
+target="_blank"
+>
+
+<div class="icon">
+🌎
+</div>
+
+Khatauni
+
+</a>
+
+<a
+class="card"
+href="https://egovcsc.csccloud.in/nsdl/"
+target="_blank"
+>
+
+<div class="icon">
+💳
+</div>
+
+PAN Card
+
+</a>
+
+</div>
+
+</div>
+
+<!-- Farmer Related Services -->
+
+<div class="category">
+
+<h2>
+🌱 Farmer Services
+</h2>
+
+<div class="grid">
+
+<a
+class="card"
+href="https://pmkisan.gov.in/"
+target="_blank"
+>
+
+<div class="icon">
+🍀
+</div>
+
+PM Kisan
+
+</a>
+
+<a
+class="card"
+href="https://eproc.up.gov.in/paddy2324/Uparjan/FarmerRegLogin.aspx"
+target="_blank"
+>
+
+<div class="icon">
+🌾
+</div>
+
+FCS Sell
+
+</a>
+
+<a
+class="card"
+href="https://agridarshan.up.gov.in/"
+target="_blank"
+>
+
+<div class="icon">
+🌱
+</div>
+
+Agridarshan
+
+</a>
+
+<a
+class="card"
+href="https://bor.up.nic.in/"
+target="_blank"
+>
+
+<div class="icon">
+⚖
+</div>
+
+Board of Revenue
+
+</a>
+
+</div>
+
+</div>
+
+<!-- AI TOOLS -->
+
+<div class="category">
+
+<h2>
+🤖 AI Tools
+</h2>
+
+<div class="grid">
+
+<a
+class="card"
+href="https://online2pdf.com/"
+target="_blank"
+>
+
+<div class="icon">
+📝
+</div>
+
+PDF Tool
+
+</a>
+
+<a
+class="card"
+href="https://gemini.google.com/"
+target="_blank"
+>
+
+<div class="icon">
+✨
+</div>
+
+Gemini
+
+</a>
+
+<a
+class="card"
+href="https://www.canva.com/"
+target="_blank"
+>
+
+<div class="icon">
+🎨
+</div>
+
+Canva
+
+</a>
+
+<a
+class="card"
+href="https://remove.bg/"
+target="_blank"
+>
+
+<div class="icon">
+🖼️
+</div>
+
+Remove BG
+
+</a>
+
+</div>
+
+</div>
+
+<!-- EDUCATIONAL SERVICES -->
+
+<div class="category">
+
+<h2>
+📖 Educational Services
+</h2>
+
+<div class="grid">
+
+<a
+class="card"
+href="https://www.sarkariresult.com/"
+target="_blank"
+>
+
+<div class="icon">
+📖
+</div>
+
+Sarkari Result
+
+</a>
+
+<button
+class="card"
+onclick="openUniversityModal()"
+type="button"
+>
+
+<div class="icon">
+🎓
+</div>
+
+MSDSU Azamgarh
+
+</button>
+
+<a
+class="card"
+href="https://paytm.com/"
+target="_blank"
+>
+
+<div class="icon">
+💳
+</div>
+
+Paytm
+
+</a>
+
 </div>
 
 </div>
@@ -511,7 +769,252 @@ Electric Bill
 Made with ❤️ for CSC Use
 </div>
 
+<!-- UNIVERSITY MODAL -->
+
+<div
+id="universityModal"
+class="modal"
+>
+
+<div class="modalContent">
+
+<div class="modalHeader">
+
+<h2>
+🎓 Maharaja Suhel Dev University Azamgarh
+</h2>
+
+<span
+class="closeBtn"
+onclick="closeUniversityModal()"
+>
+×
+</span>
+
+</div>
+
+<div class="modalGrid">
+
+<a
+class="modalCard"
+href="https://msdsu.ac.in/"
+target="_blank"
+>
+
+<div class="icon">
+🏠
+</div>
+
+Home
+
+</a>
+
+<a
+class="modalCard"
+href="https://msdsuonline.in/"
+target="_blank"
+>
+
+<div class="icon">
+📝
+</div>
+
+Exam Form
+
+</a>
+
+<a
+class="modalCard"
+href="https://msduexam.co.in/"
+target="_blank"
+>
+
+<div class="icon">
+📄
+</div>
+
+Results
+
+</a>
+
+<a
+class="modalCard"
+href="https://msdsu.samarth.edu.in/index.php/site/login"
+target="_blank"
+>
+
+<div class="icon">
+🎫
+</div>
+
+Samarth Login
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- AADHAAR MODAL -->
+
+<div
+id="aadhaarModal"
+class="modal"
+>
+
+<div class="modalContent">
+
+<div class="modalHeader">
+
+<h2>
+⌨ Aadhaar Services
+</h2>
+
+<span
+class="closeBtn"
+onclick="closeAadhaarModal()"
+>
+×
+</span>
+
+</div>
+
+<div class="modalGrid">
+
+<a
+class="modalCard"
+href="https://myaadhaar.uidai.gov.in/"
+target="_blank"
+>
+
+<div class="icon">
+🏠
+</div>
+
+Aadhaar Login
+
+</a>
+
+<a
+class="modalCard"
+href="https://myaadhaar.uidai.gov.in/check-aadhaar-validity/en"
+target="_blank"
+>
+
+<div class="icon">
+📲
+</div>
+
+Linked Mobile
+
+</a>
+
+<a
+class="modalCard"
+href="https://myaadhaar.uidai.gov.in/CheckAadhaarStatus/en"
+target="_blank"
+>
+
+<div class="icon">
+🔍
+</div>
+
+Check Status
+
+</a>
+
+<a
+class="modalCard"
+href="https://myaadhaar.uidai.gov.in/genricDownloadAadhaar/en"
+target="_blank"
+>
+
+<div class="icon">
+⮟
+</div>
+
+Download Aadhaar
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
+
+let voices = [];
+
+window.speechSynthesis.onvoiceschanged = () => {
+
+voices = window.speechSynthesis.getVoices();
+
+};
+
+/* ENTER KEY SUPPORT */
+
+document.getElementById("number").addEventListener("keypress", function(event){
+
+if(event.key === "Enter"){
+
+checkStatus();
+
+}
+
+});
+
+/* AUTO FOCUS */
+
+window.onload = function(){
+
+document.getElementById("number").focus();
+
+};
+
+/* PLACEHOLDER CHANGE */
+
+document.getElementById("service").addEventListener("change", function(){
+
+const service = this.value;
+
+const input =
+document.getElementById("number");
+
+if(service === "electric"){
+
+input.placeholder =
+"Enter Electricity Account Number";
+
+}
+
+else if(service === "edistrict"){
+
+input.placeholder =
+"Enter Application Number";
+
+}
+
+else if(service === "varasat"){
+
+input.placeholder =
+"Enter Case Number";
+
+}
+
+else if(service === "google"){
+
+input.placeholder =
+"Search anything on Google...";
+
+}
+
+});
+
+/* MAIN FUNCTION */
 
 function checkStatus(){
 
@@ -529,18 +1032,26 @@ return;
 
 }
 
-let url = "";
+/* GOOGLE SEARCH */
 
 if(service === "google"){
 
-url =
+const googleUrl =
 "https://www.google.com/search?q="
 +
 encodeURIComponent(number);
 
+window.open(googleUrl, "_blank");
+
+return;
+
 }
 
-else if(service === "electric"){
+/* STATUS SERVICES */
+
+let url = "";
+
+if(service === "electric"){
 
 url =
 "https://consumer.uppcl.org/wss/pay_bill?kno="
@@ -571,7 +1082,103 @@ encodeURIComponent(number);
 
 window.open(url, "_blank");
 
+speakStatus(number);
+
 }
+
+/* ENGLISH VOICE */
+
+function speakStatus(number){
+
+const message =
+"Please recheck the numbers. Your entered number is "
++
+number.split('').join(' ');
+
+const speech =
+new SpeechSynthesisUtterance(message);
+
+speech.lang = "en-US";
+
+speech.rate = 1.15;
+
+speech.pitch = 1;
+
+const englishVoice = voices.find(voice =>
+
+voice.name.includes("Microsoft")
+&&
+voice.lang.includes("en")
+
+);
+
+if(englishVoice){
+
+speech.voice = englishVoice;
+
+}
+
+window.speechSynthesis.cancel();
+
+window.speechSynthesis.speak(speech);
+
+}
+
+/* UNIVERSITY MODAL */
+
+function openUniversityModal(){
+
+document.getElementById("universityModal").style.display =
+"flex";
+
+}
+
+function closeUniversityModal(){
+
+document.getElementById("universityModal").style.display =
+"none";
+
+}
+
+/* AADHAAR MODAL */
+
+function openAadhaarModal(){
+
+document.getElementById("aadhaarModal").style.display =
+"flex";
+
+}
+
+function closeAadhaarModal(){
+
+document.getElementById("aadhaarModal").style.display =
+"none";
+
+}
+
+/* CLOSE OUTSIDE CLICK */
+
+window.onclick = function(event){
+
+const universityModal =
+document.getElementById("universityModal");
+
+const aadhaarModal =
+document.getElementById("aadhaarModal");
+
+if(event.target === universityModal){
+
+universityModal.style.display = "none";
+
+}
+
+if(event.target === aadhaarModal){
+
+aadhaarModal.style.display = "none";
+
+}
+
+};
 
 </script>
 
