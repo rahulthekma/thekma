@@ -109,20 +109,19 @@ Search / Check
 
 <div class="grid">
 
-<a
+<button
 class="card"
-href="https://digitalseva.csc.gov.in"
-target="_blank"
-rel="noopener noreferrer"
+onclick="opencscModal()"
+type="button"
 >
 
 <div class="icon">
-<img src="images/csc.webp" alt="CSC Logo">
+💻
 </div>
 
 CSC
 
-</a>
+</button>
 
 <a
 class="card"
@@ -534,7 +533,98 @@ Samarth Login
 
 </div>
 
-<!-- AADHAAR MODAL -->
+<!-- CSC MODAL -->
+<div
+id="cscModal"
+class="modal"
+>
+
+<div class="modalContent">
+
+<div class="modalHeader">
+
+<h2>
+💻 Common Service Centre
+</h2>
+
+<span
+class="closeBtn"
+onclick="closecscModal()"
+>
+×
+</span>
+
+</div>
+
+<div class="modalGrid">
+
+<a
+class="modalCard"
+href="https://digitalseva.csc.gov.in/"
+target="_blank"
+rel="noopener noreferrer"
+>
+
+<div class="icon">
+<img src="images/csc.webp" alt="CSC Logo">
+</div>
+
+Digital Seva
+
+</a>
+
+<a
+class="modalCard"
+href="https://digipayweb.csccloud.in/"
+target="_blank"
+rel="noopener noreferrer"
+>
+
+<div class="icon">
+🏧
+</div>
+
+Digipay
+
+</a>
+
+<a
+class="modalCard"
+href="https://agent2.paycsc.in/"
+target="_blank"
+rel="noopener noreferrer"
+>
+
+<div class="icon">
+🏧
+</div>
+
+Digipay Lite
+
+</a>
+
+<a
+class="modalCard"
+href="https://egovcsc.csccloud.in/nsdl/"
+target="_blank"
+rel="noopener noreferrer"
+>
+
+<div class="icon">
+🎫
+</div>
+
+Protean PAN
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+	<!-- AADHAAR MODAL -->
 
 <div
 id="aadhaarModal"
