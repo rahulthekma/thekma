@@ -169,6 +169,19 @@ document.getElementById("universityModal").style.display =
 "none";
 
 }
+function opencscModal(){
+
+document.getElementById("cscModal").style.display =
+"flex";
+
+}
+
+function closecscModal(){
+
+document.getElementById("cscModal").style.display =
+"none";
+
+}
 
 function openAadhaarModal(){
 
@@ -189,6 +202,9 @@ window.onclick = function(event){
 const universityModal =
 document.getElementById("universityModal");
 
+const cscModal =
+document.getElementById("cscModal");
+  
 const aadhaarModal =
 document.getElementById("aadhaarModal");
 
@@ -197,7 +213,12 @@ if(event.target === universityModal){
 universityModal.style.display = "none";
 
 }
+if(event.target === cscModal){
 
+cscModal.style.display = "none";
+
+}
+  
 if(event.target === aadhaarModal){
 
 aadhaarModal.style.display = "none";
