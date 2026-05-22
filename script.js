@@ -110,7 +110,7 @@ encodeURIComponent(number);
 else if(service === "varasat"){
 
 url =
-"https://vaad.up.nic.in/KhaPu_User/P11_Applicant_Details.aspx?case_auto_nogen="
+"https://rccms.up.gov.in/Varasat/Print_Order?case_autonogen="
 +
 encodeURIComponent(number);
 
