@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>स्मार्ट जनसेवा केंद्र | प्रिंट पोर्टल</title>
+    <title>स्मार्ट जनसेवा केंद्र | फ़ाइल अपलोड</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .view { display: none; }
@@ -13,7 +13,6 @@
 </head>
 <body class="bg-gray-50 min-h-screen">
 
-    <!-- NAVIGATION -->
     <nav class="bg-blue-800 p-4 text-white shadow-lg no-print">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold">जनसेवा केंद्र</h1>
@@ -24,10 +23,8 @@
         </div>
     </nav>
 
-    <!-- STATUS MESSAGE BOX -->
     <div id="status-box" class="hidden fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-xl z-50"></div>
 
-    <!-- CUSTOMER UPLOAD VIEW -->
     <main id="customer-view" class="view container mx-auto p-4 max-w-md">
         <div class="bg-white p-6 rounded-xl shadow-md">
             <h2 class="text-xl font-bold mb-4 text-blue-800">फ़ाइल अपलोड करें</h2>
@@ -37,8 +34,8 @@
                     <input type="text" id="cust-name" required class="w-full p-2 border rounded">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium">फ़ाइल का नाम</label>
-                    <input type="text" id="file-name" required class="w-full p-2 border rounded">
+                    <label class="block text-sm font-medium">फ़ाइल चुनें (PDF/Image)</label>
+                    <input type="file" id="file-input" accept=".pdf,.jpg,.jpeg,.png" required class="w-full p-2 border rounded">
                 </div>
                 <div>
                     <label class="block text-sm font-medium">प्रिंट प्रकार</label>
@@ -61,17 +58,16 @@
                 <div class="p-3 bg-gray-50 rounded text-center border-2 border-green-200">
                     <p class="text-md">पेमेंट राशि: <span id="total-fee" class="font-bold text-green-700">₹5</span></p>
                 </div>
-                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold">सबमिट करें</button>
+                <button type="submit" id="submit-btn" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold">सबमिट करें</button>
             </form>
         </div>
     </main>
 
-    <!-- ADMIN DASHBOARD VIEW -->
     <main id="admin-view" class="view active container mx-auto p-4">
         <div class="bg-white p-4 rounded-lg shadow mb-6 overflow-x-auto">
             <h2 class="text-lg font-bold mb-4">लंबित प्रिंट अनुरोध</h2>
             <table class="w-full text-sm text-left">
-                <thead><tr class="border-b"><th class="p-2">ग्राहक</th><th class="p-2">विवरण</th><th class="p-2">शुल्क</th><th class="p-2">एक्शन</th></tr></thead>
+                <thead><tr class="border-b"><th class="p-2">ग्राहक</th><th class="p-2">फ़ाइल</th><th class="p-2">शुल्क</th><th class="p-2">एक्शन</th></tr></thead>
                 <tbody id="order-list"></tbody>
             </table>
         </div>
@@ -80,8 +76,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
-        // IMPORTANT: REPLACE WITH YOUR FIREBASE CONFIG
+        // IMPORTANT: REPLACE THIS CONFIG WITH YOURS
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_PROJECT.firebaseapp.com",
@@ -93,9 +90,10 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
-        // UI Logic: Show/Hide Views
-        const showView = (id) => {
+        // UI Logic
+        window.showView = (id) => {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(id + '-view').classList.add('active');
         };
@@ -103,7 +101,6 @@
         document.getElementById('nav-btn-customer').addEventListener('click', () => showView('customer'));
         document.getElementById('nav-btn-admin').addEventListener('click', () => showView('admin'));
 
-        // Fee Logic
         window.calculateFee = function() {
             const color = document.getElementById('color-type').value;
             const side = document.getElementById('side-type').value;
@@ -112,27 +109,41 @@
             document.getElementById('total-fee').innerText = '₹' + (rate * pages);
         };
 
-        // Submit Form
+        // Form Submit
         document.getElementById('upload-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const orderData = {
-                name: document.getElementById('cust-name').value,
-                fileName: document.getElementById('file-name').value,
-                colorType: document.getElementById('color-type').value,
-                sideType: document.getElementById('side-type').value,
-                pages: document.getElementById('pages-count').value,
-                fee: document.getElementById('total-fee').innerText,
-                createdAt: serverTimestamp()
-            };
-            await addDoc(collection(db, 'orders'), orderData);
-            
-            const box = document.getElementById('status-box');
-            box.innerText = 'ऑर्डर सबमिट हो गया!';
-            box.classList.remove('hidden');
-            setTimeout(() => box.classList.add('hidden'), 3000);
-            
-            e.target.reset();
-            window.calculateFee();
+            const btn = document.getElementById('submit-btn');
+            btn.innerText = 'अपलोड हो रहा है...';
+            btn.disabled = true;
+
+            try {
+                const file = document.getElementById('file-input').files[0];
+                const storageRef = ref(storage, 'uploads/' + Date.now() + '_' + file.name);
+                await uploadBytes(storageRef, file);
+                const fileUrl = await getDownloadURL(storageRef);
+
+                await addDoc(collection(db, 'orders'), {
+                    name: document.getElementById('cust-name').value,
+                    fileUrl: fileUrl,
+                    fileName: file.name,
+                    colorType: document.getElementById('color-type').value,
+                    sideType: document.getElementById('side-type').value,
+                    pages: document.getElementById('pages-count').value,
+                    fee: document.getElementById('total-fee').innerText,
+                    createdAt: serverTimestamp()
+                });
+
+                const box = document.getElementById('status-box');
+                box.innerText = 'फ़ाइल अपलोड हो गई!';
+                box.classList.remove('hidden');
+                setTimeout(() => box.classList.add('hidden'), 3000);
+                e.target.reset();
+            } catch (err) {
+                alert('गलती: ' + err.message);
+            } finally {
+                btn.innerText = 'सबमिट करें';
+                btn.disabled = false;
+            }
         });
 
         // Live Dashboard
@@ -143,7 +154,7 @@
                 const data = docSnap.data();
                 const row = document.createElement('tr');
                 row.className = 'border-b';
-                row.innerHTML = `<td class="p-2 font-bold">${data.name}</td><td class="p-2">${data.fileName}<br><span class="text-xs text-gray-500">${data.colorType}/${data.sideType}</span></td><td class="p-2">${data.fee}</td><td class="p-2"><button onclick="window.print()" class="bg-blue-500 text-white px-2 py-1 rounded text-xs">Print</button></td>`;
+                row.innerHTML = `<td class="p-2 font-bold">${data.name}</td><td class="p-2"><a href="${data.fileUrl}" target="_blank" class="text-blue-600 underline">View File</a></td><td class="p-2">${data.fee}</td><td class="p-2"><button onclick="window.print()" class="bg-blue-500 text-white px-2 py-1 rounded text-xs">Print</button></td>`;
                 list.appendChild(row);
             });
         });
