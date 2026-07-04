@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्मार्ट जनसेवा केंद्र | सिस्टम</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .view { display: none; }
+        .active { display: block; }
+        @media print { .no-print { display: none; } }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- NAVIGATION -->
+    <nav class="bg-blue-800 p-4 text-white shadow-lg no-print">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">जनसेवा केंद्र | पोर्टल</h1>
+            <div class="space-x-4">
+                <button onclick="showView('admin')" class="bg-blue-600 px-3 py-1 rounded">एडमिन</button>
+                <button onclick="showView('customer')" class="bg-green-600 px-3 py-1 rounded">ग्राहक</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CUSTOMER UPLOAD VIEW -->
+    <main id="customer-view" class="view container mx-auto p-6 max-w-lg">
+        <div class="bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-bold mb-6 text-center text-blue-800">फ़ाइल अपलोड</h2>
+            <form id="upload-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium">आपका नाम</label>
+                    <input type="text" id="cust-name" required class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">फ़ाइल का नाम</label>
+                    <input type="text" id="file-name" required class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">प्रिंट प्रकार</label>
+                    <select id="color-type" onchange="calculateFee()" class="w-full p-2 border rounded">
+                        <option value="bw">ब्लैक एंड व्हाईट (सादा)</option>
+                        <option value="color">रंगीन (Color)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">साइड</label>
+                    <select id="side-type" onchange="calculateFee()" class="w-full p-2 border rounded">
+                        <option value="single">एक तरफा (Single Side)</option>
+                        <option value="double">दोनों तरफ (Double Side)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">कुल पृष्ठों की संख्या</label>
+                    <input type="number" id="pages-count" value="1" min="1" oninput="calculateFee()" class="w-full p-2 border rounded">
+                </div>
+                <div class="p-4 bg-gray-50 rounded text-center border-2 border-green-200">
+                    <p class="text-lg">पेमेंट राशि: <span id="total-fee" class="font-bold text-green-700">₹5</span></p>
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">सबमिट करें</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- ADMIN DASHBOARD VIEW -->
+    <main id="admin-view" class="view active container mx-auto p-6">
+        <div class="bg-white p-6 rounded-lg shadow mb-6">
+            <h2 class="text-lg font-bold mb-4">हालिया अनुरोध</h2>
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b">
+                        <th class="p-2">ग्राहक</th>
+                        <th class="p-2">प्रिंट डिटेल्स</th>
+                        <th class="p-2">शुल्क</th>
+                        <th class="p-2 text-center">प्रिंट</th>
+                    </tr>
+                </thead>
+                <tbody id="order-list"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'jan-seva-default';
+
+        window.calculateFee = function() {
+            const colorType = document.getElementById('color-type').value;
+            const sideType = document.getElementById('side-type').value;
+            const pages = parseInt(document.getElementById('pages-count').value) || 0;
+            
+            let rate = 0;
+            if (colorType === 'color') {
+                rate = (sideType === 'single') ? 10 : 15;
+            } else {
+                rate = 5; // सादा हमेशा 5 रुपये
+            }
+            
+            const total = rate * pages;
+            document.getElementById('total-fee').innerText = '₹' + total;
+        };
+
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const orderData = {
+                name: document.getElementById('cust-name').value,
+                fileName: document.getElementById('file-name').value,
+                colorType: document.getElementById('color-type').value,
+                sideType: document.getElementById('side-type').value,
+                pages: document.getElementById('pages-count').value,
+                fee: document.getElementById('total-fee').innerText,
+                createdAt: serverTimestamp()
+            };
+            
+            await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'orders'), orderData);
+            alert('सफलतापूर्वक ऑर्डर सबमिट हुआ!');
+            e.target.reset();
+            calculateFee();
+        });
+
+        onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'orders'), (snapshot) => {
+            const list = document.getElementById('order-list');
+            list.innerHTML = '';
+            const now = Date.now();
+
+            snapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const created = data.createdAt?.toMillis();
+
+                if (created && (now - created > 86400000)) {
+                    deleteDoc(docSnap.ref);
+                } else {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b';
+                    row.innerHTML = `
+                        <td class="p-2 font-bold">${data.name}</td>
+                        <td class="p-2 text-sm">${data.fileName}<br><span class="text-gray-500">${data.colorType === 'color' ? 'रंगीन' : 'सादा'} | ${data.sideType === 'single' ? 'एक तरफ' : 'दोनों तरफ'} | ${data.pages} पेज</span></td>
+                        <td class="p-2">${data.fee}</td>
+                        <td class="p-2 text-center"><button onclick="window.print()" class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Print</button></td>
+                    `;
+                    list.appendChild(row);
+                }
+            });
+        });
+
+        window.showView = function(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId + '-view').classList.add('active');
+        };
+    </script>
+</body>
+</html>
