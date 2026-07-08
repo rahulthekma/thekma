@@ -1,4 +1,4 @@
-import { db, storage } from "./firebase-config.js";
+import { db } from "./firebase-config.js";
 
 import {
 collection,
@@ -6,13 +6,6 @@ addDoc,
 serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-import {
-ref,
-uploadBytes,
-getDownloadURL
-}
-from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
 const uploadForm = document.getElementById("uploadForm");
 
@@ -95,23 +88,35 @@ const orderId =
 "ORD" +
 Date.now();
 
-const storageRef = ref(
-storage,
-"uploads/" +
-orderId +
-"_" +
-file.name
+const formData = new FormData();
+
+formData.append("file", file);
+
+formData.append(
+"upload_preset",
+"cscprint"
 );
 
-await uploadBytes(
-storageRef,
-file
+const uploadResponse =
+await fetch(
+"https://api.cloudinary.com/v1_1/ibjslwtg/auto/upload",
+{
+method: "POST",
+body: formData
+}
 );
+
+const uploadData =
+await uploadResponse.json();
+
+if (!uploadData.secure_url) {
+throw new Error(
+"Cloudinary Upload Failed"
+);
+}
 
 const fileUrl =
-await getDownloadURL(
-storageRef
-);
+uploadData.secure_url;
 
 await addDoc(
 collection(db, "orders"),
