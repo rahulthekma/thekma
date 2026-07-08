@@ -137,7 +137,8 @@ fileName:
 file.name,
 
 fileUrl,
-
+amount: 0,
+paymentStatus: "Unpaid",
 colorType:
 colorType.value,
 
