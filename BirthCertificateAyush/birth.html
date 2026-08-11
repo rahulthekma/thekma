@@ -17,7 +17,6 @@
         
         /* 🎛️ बटन लेआउट */
         .buttons{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
-        .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
         button{border:0;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:14px}
         .success{background:#16a34a;color:#fff} 
         .secondary{background:#e8edf5;color:#102a56}
@@ -44,10 +43,10 @@
             .stage{padding:10px}
         }
         
-        /* 🖨️ प्रिंट और पीडीएफ सेटिंग्स - अतिरिक्त ब्लैंक पेज रोकने के लिए फिक्स */
+        /* 🖨️ प्रिंट सेटिंग्स */
         @media print{
             html, body {
-                height: 100%;
+                height: 100% !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 overflow: hidden !important;
@@ -116,11 +115,8 @@
             </div>
             
             <div class="buttons">
-                <!-- ✅ बटन क्लिक पर सीधा ब्राउज़र का परफेक्ट पीडीएफ डायलॉग खुलेगा -->
                 <button class="success" onclick="printCertificate()">📥 Save PDF / Print</button>
-                <div class="btn-row">
-                    <button class="secondary" onclick="newForm()">➕ New</button>
-                </div>
+                <button class="secondary" onclick="newForm()">➕ New</button>
             </div>
             
             <div class="hint">
@@ -154,7 +150,8 @@
         const ids = ["srno", "issueDate", "gender", "mother", "father", "address", "baby", "date", "time"];
 
         function v(id) {
-            return document.getElementById(id).value.trim();
+            const el = document.getElementById(id);
+            return el ? el.value.trim() : "";
         }
 
         function getTodayDateString() {
@@ -167,8 +164,10 @@
 
         function setDefaultDates() {
             const today = getTodayDateString();
-            document.getElementById("issueDate").value = today;
-            document.getElementById("date").value = today;
+            const elIssue = document.getElementById("issueDate");
+            const elDate = document.getElementById("date");
+            if(elIssue) elIssue.value = today;
+            if(elDate) elDate.value = today;
         }
 
         function formatSrNo(val) {
@@ -233,7 +232,12 @@
             update();
         }
 
-        // ✅ एरर-फ्री प्रिंट और पीडीएफ जनरेटर फंक्शन
         function printCertificate() {
             window.print();
         }
+
+        setDefaultDates();
+        update();
+    </script>
+</body>
+</html>
