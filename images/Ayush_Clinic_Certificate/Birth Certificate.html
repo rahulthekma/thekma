@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Ayush Clinic - Certificate Generator</title>
+    <style>
+        *{box-sizing:border-box}
+        body{margin:0;background:#eef1f5;font-family:Arial,sans-serif;color:#17233b}
+        .app{min-height:100vh;display:grid;grid-template-columns:370px 1fr}
+        .panel{background:#fff;padding:20px;box-shadow:2px 0 12px rgba(0,0,0,.10);overflow:auto}
+        h1{margin:0;color:#0c234b;font-size:22px}
+        .sub{font-size:12px;color:#64748b;margin:5px 0 18px}
+        label{display:block;font-size:13px;font-weight:700;margin:11px 0 5px}
+        input,select{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px}
+        .row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+        
+        /* 🎛️ बटनों का सुंदर और व्यवस्थित लेआउट */
+        .buttons{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
+        .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        button{border:0;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:14px}
+        .primary{background:#102a56;color:#fff}
+        .success{background:#16a34a;color:#fff} 
+        .secondary{background:#e8edf5;color:#102a56}
+        
+        .hint{font-size:11px;color:#64748b;line-height:1.45;margin-top:12px}
+        .stage{padding:24px;display:flex;justify-content:center;align-items:flex-start;overflow:auto}
+        .sheet{position:relative;width:min(794px,94vw);aspect-ratio:1024/1484;background:#fff;box-shadow:0 5px 25px rgba(0,0,0,.18);overflow:hidden}
+        .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+        .text{position:absolute;color:#111;font-family:"Times New Roman",serif;font-size:clamp(15px,1.8vw,20px);line-height:1;white-space:nowrap}
+        
+        /* 📍 सर्टिफिकेट पर शब्दों की सही जगह (Positions) */
+        .srno-container{left:08.5%;top:38.0%;display:flex;gap:350px;font-weight:550;font-size: 20px;} 
+        .gender{left:56.8%;top:42.0%;font-weight:550;font-size: 25px;}
+        .mother{left:29.9%;top:46.0%;font-weight:550;font-size: 23px;}
+        .father{left:25.5%;top:50.8%;font-weight:550;font-size: 23px}
+        .address{left:27.0%;top:55.5%;font-size: 17px}
+        .baby{left:28.0%;top:60.0%;font-weight:550;font-size: 23px}
+        .date{left:27.0%;top:69.2%;font-weight:550;font-size: 23px}
+        .time{left:65.0%;top:69.2%;font-weight:550;font-size: 23px}
+        
+        @media(max-width:850px){
+            .app{grid-template-columns:1fr}
+            .panel{box-shadow:none}
+            .stage{padding:10px}
+        }
+        
+        /* 🖨️ प्रिंट सेटिंग्स: यहाँ 95% स्केल (Scale) फिक्स किया गया है */
+        @media print{
+            body{background:#fff}
+            .panel{display:none}
+            .app{display:block}
+            .stage{padding:0}
+            .sheet{
+                width:210mm;
+                height:304.6mm;
+                box-shadow:none;
+                transform: scale(0.95); /* सर्टिफिकेट को 95% पर सिकोड़ने के लिए */
+                transform-origin: top center;
+            }
+            @page{size:A4 portrait;margin:0}
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <section class="panel">
+            <h1>🩺 Ayush Clinic</h1>
+            <div class="sub">Thekma Azamgarh • Certificate Generator</div>
+            
+            <div class="row">
+                <div>
+                    <label>Sr. No. (नंबर डालें)</label>
+                    <input id="srno" placeholder="e.g. 125">
+                </div>
+                <div>
+                    <label>Issue Date</label>
+                    <input id="issueDate" type="date">
+                </div>
+            </div>
+
+            <label>Baby</label>
+            <select id="gender">
+                <option value="Girl">Girl</option>
+                <option value="Boy">Boy</option>
+            </select>
+            
+            <label>Smt. (Mother) Name</label>
+            <input id="mother" placeholder="Mother's name">
+            
+            <label>W/o Shri (Husband/Father) Name</label>
+            <input id="father" placeholder="Husband/Father's name">
+            
+            <label>Resident of (R/o)</label>
+            <input id="address" placeholder="Village, Post, District">
+            
+            <label>Baby Name (Named as)</label>
+            <input id="baby" placeholder="Baby's name">
+            
+            <div class="row">
+                <div>
+                    <label>Date (Birth Date)</label>
+                    <input id="date" type="date">
+                </div>
+                <div>
+                    <label>Time</label>
+                    <input id="time" type="time">
+                </div>
+            </div>
+            
+            <!-- 🎛️ बटन सेटिंग्स: प्रिंट और सेव पीडीएफ दोनों के लिए सुधरा हुआ सिस्टम -->
+            <div class="buttons">
+                <button class="success" onclick="window.print()">📥 Save as PDF</button>
+                <div class="btn-row">
+                    <button class="primary" onclick="window.print()">🖨️ Print (95%)</button>
+                    <button class="secondary" onclick="newForm()">➕ New</button>
+                </div>
+            </div>
+            
+            <div class="hint">
+                <strong>Print/PDF Tips:</strong> <br>
+                1. बटन दबाने के बाद Destination में <strong>"Save as PDF"</strong> चुनें या अपना प्रिंटर चुनें।<br>
+                2. More Settings में जाकर <strong>Scale को 95%</strong> पर सेट करें यदि वह अपने आप नहीं होता।
+            </div>
+        </section>
+        
+        <main class="stage">
+            <div class="sheet">
+                <img class="bg" src="Img2.png" alt="Certificate template">
+                
+                <div class="text srno-container">
+                    <span id="oSrno"></span>
+                    <span id="oIssueDate"></span>
+                </div>
+
+                <div class="text gender" id="oGender">Girl</div>
+                <div class="text mother" id="oMother"></div>
+                <div class="text father" id="oFather"></div>
+                <div class="text address" id="oAddress"></div>
+                <div class="text baby" id="oBaby"></div>
+                <div class="text date" id="oDate"></div>
+                <div class="text time" id="oTime"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const ids = ["srno", "issueDate", "gender", "mother", "father", "address", "baby", "date", "time"];
+
+        function v(id) {
+            return document.getElementById(id).value.trim();
+        }
+
+        function getTodayDateString() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        function setDefaultDates() {
+            const today = getTodayDateString();
+            document.getElementById("issueDate").value = today;
+            document.getElementById("date").value = today;
+        }
+
+        function formatSrNo(val) {
+            if (!val) return "";
+            let birthYear = new Date().getFullYear(); 
+            const birthDateValue = v("date");
+            if (birthDateValue) {
+                birthYear = birthDateValue.split("-")[0];
+            }
+            const cleanNum = val.replace(/[^0-9]/g, ""); 
+            const paddedNum = cleanNum.padStart(5, "0"); 
+            return "Sr. No : " + birthYear + "/" + paddedNum;
+        }
+
+        function dateText(s) {
+            if (!s) return "";
+            const [y, m, d] = s.split("-");
+            return d + "-" + m + "-" + y;
+        }
+
+        function formatIssueDate(s) {
+            if (!s) return "";
+            return "Date : " + dateText(s);
+        }
+
+        function formatTime(time) {
+            if (!time) return "";
+            let [hours, minutes] = time.split(":");
+            hours = parseInt(hours, 10);
+            const ampm = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12;
+            return String(hours).padStart(2, "0") + ":" + minutes + " " + ampm;
+        }
+
+        function update() {
+            document.getElementById("oSrno").textContent = formatSrNo(v("srno"));
+            document.getElementById("oIssueDate").textContent = formatIssueDate(v("issueDate"));
+            document.getElementById("oGender").textContent = v("gender");
+            document.getElementById("oMother").textContent = v("mother");
+            document.getElementById("oFather").textContent = v("father");
+            document.getElementById("oAddress").textContent = v("address");
+            document.getElementById("oBaby").textContent = v("baby");
+            document.getElementById("oDate").textContent = dateText(v("date"));
+            document.getElementById("oTime").textContent = formatTime(v("time"));
+        }
+
+        ids.forEach(id => {
+            const el = document.getElementById(id);
+            if(el) {
+                el.addEventListener("input", update);
+                el.addEventListener("change", update);
+            }
+        });
+
+        function newForm() {
+            document.getElementById("gender").value = "Girl";
+            ["srno", "mother", "father", "address", "baby", "time"].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.value = "";
+            });
+            setDefaultDates(); 
+            update();
+        }
+
+        // शुरुआत में रन करें
+        setDefaultDates();
+        update();
+    </script>
+</body>
+</html>
