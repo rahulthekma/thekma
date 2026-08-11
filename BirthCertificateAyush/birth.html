@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Ayush Clinic - Certificate Generator</title>
-    
-    <!-- 📄 PDF डाउनलोड करने के लिए सुरक्षित और सटीक लाइब्रेरी लिंक्स -->
-    <script src="https://cloudflare.com" crossorigin="anonymous" defer></script>
-    <script src="https://cloudflare.com" crossorigin="anonymous" defer></script>
-
     <style>
         *{box-sizing:border-box}
         body{margin:0;background:#eef1f5;font-family:Arial,sans-serif;color:#17233b}
@@ -20,11 +15,10 @@
         input,select{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px}
         .row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
         
-        /* 🎛️ बटनों का सुंदर और व्यवस्थित लेआउट */
+        /* 🎛️ बटन लेआउट */
         .buttons{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
         .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
         button{border:0;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:14px}
-        .primary{background:#102a56;color:#fff}
         .success{background:#16a34a;color:#fff} 
         .secondary{background:#e8edf5;color:#102a56}
         
@@ -34,7 +28,7 @@
         .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
         .text{position:absolute;color:#111;font-family:"Times New Roman",serif;font-size:clamp(15px,1.8vw,20px);line-height:1;white-space:nowrap}
         
-        /* 📍 सर्टिफिकेट पर शब्दों की सही जगह (Positions) */
+        /* 📍 सर्टिफिकेट पर शब्दों की जगह (Positions) */
         .srno-container{left:08.5%;top:38.0%;display:flex;gap:350px;font-weight:550;font-size: 20px;} 
         .gender{left:56.8%;top:42.0%;font-weight:550;font-size: 25px;}
         .mother{left:29.9%;top:46.0%;font-weight:550;font-size: 23px;}
@@ -50,20 +44,28 @@
             .stage{padding:10px}
         }
         
-        /* 🖨️ प्रिंट सेटिंग्स: 95% स्केल (Scale) */
+        /* 🖨️ प्रिंट और पीडीएफ सेटिंग्स - अतिरिक्त ब्लैंक पेज रोकने के लिए फिक्स */
         @media print{
-            body{background:#fff}
-            .panel{display:none}
-            .app{display:block}
-            .stage{padding:0}
+            html, body {
+                height: 100%;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            .panel{display:none !important}
+            .app{display:block !important}
+            .stage{padding:0 !important; margin:0 !important; overflow: hidden !important;}
             .sheet{
                 width:210mm;
                 height:304.6mm;
                 box-shadow:none;
-                transform: scale(0.95);
+                margin: 0 auto !important;
+                page-break-after: avoid !important;
+                page-break-before: avoid !important;
+                transform: scale(0.95); /* 95% स्केल */
                 transform-origin: top center;
             }
-            @page{size:A4 portrait;margin:0}
+            @page{size:A4 portrait; margin:0 !important;}
         }
     </style>
 </head>
@@ -114,18 +116,17 @@
             </div>
             
             <div class="buttons">
-                <!-- 📥 सेव पीडीएफ बटन -->
-                <button class="success" onclick="downloadPDF()">📥 Save PDF Directly</button>
+                <!-- ✅ बटन क्लिक पर सीधा ब्राउज़र का परफेक्ट पीडीएफ डायलॉग खुलेगा -->
+                <button class="success" onclick="printCertificate()">📥 Save PDF / Print</button>
                 <div class="btn-row">
-                    <button class="primary" onclick="window.print()">🖨️ Print (95%)</button>
                     <button class="secondary" onclick="newForm()">➕ New</button>
                 </div>
             </div>
             
             <div class="hint">
                 <strong>Tips:</strong> <br>
-                1. <strong>Save PDF</strong> बटन से सीधे सर्टिफिकेट कंप्यूटर में डाउनलोड हो जाएगा।<br>
-                2. प्रिंट करते समय ऑटोमैटिकली यह 95% स्केल पर सेट रहेगा।
+                1. बटन दबाने पर <strong>"Save as PDF"</strong> चुनें या अपना प्रिंटर चुनें।<br>
+                2. अतिरिक्त खाली पन्ने की समस्या अब कोड से स्थायी रूप से हटा दी गई है।
             </div>
         </section>
         
@@ -232,4 +233,7 @@
             update();
         }
 
-        // 📥 सीधे पीडीएफ डाउनलोड करने का अचूक फंक्शन (बिना किसी क्रैश रिस्क के)
+        // ✅ एरर-फ्री प्रिंट और पीडीएफ जनरेटर फंक्शन
+        function printCertificate() {
+            window.print();
+        }
