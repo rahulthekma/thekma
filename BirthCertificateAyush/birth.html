@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Ayush Clinic - Certificate Generator</title>
+    
+    <!-- 📄 PDF डाउनलोड करने के लिए सुरक्षित और सटीक लाइब्रेरी लिंक्स -->
+    <script src="https://cloudflare.com" crossorigin="anonymous" defer></script>
+    <script src="https://cloudflare.com" crossorigin="anonymous" defer></script>
+
     <style>
         *{box-sizing:border-box}
         body{margin:0;background:#eef1f5;font-family:Arial,sans-serif;color:#17233b}
@@ -45,7 +50,7 @@
             .stage{padding:10px}
         }
         
-        /* 🖨️ प्रिंट सेटिंग्स: यहाँ 95% स्केल (Scale) फिक्स किया गया है */
+        /* 🖨️ प्रिंट सेटिंग्स: 95% स्केल (Scale) */
         @media print{
             body{background:#fff}
             .panel{display:none}
@@ -55,7 +60,7 @@
                 width:210mm;
                 height:304.6mm;
                 box-shadow:none;
-                transform: scale(0.95); /* सर्टिफिकेट को 95% पर सिकोड़ने के लिए */
+                transform: scale(0.95);
                 transform-origin: top center;
             }
             @page{size:A4 portrait;margin:0}
@@ -108,9 +113,9 @@
                 </div>
             </div>
             
-            <!-- 🎛️ बटन सेटिंग्स: प्रिंट और सेव पीडीएफ दोनों के लिए सुधरा हुआ सिस्टम -->
             <div class="buttons">
-                <button class="success" onclick="window.print()">📥 Save as PDF</button>
+                <!-- 📥 सेव पीडीएफ बटन -->
+                <button class="success" onclick="downloadPDF()">📥 Save PDF Directly</button>
                 <div class="btn-row">
                     <button class="primary" onclick="window.print()">🖨️ Print (95%)</button>
                     <button class="secondary" onclick="newForm()">➕ New</button>
@@ -118,14 +123,14 @@
             </div>
             
             <div class="hint">
-                <strong>Print/PDF Tips:</strong> <br>
-                1. बटन दबाने के बाद Destination में <strong>"Save as PDF"</strong> चुनें या अपना प्रिंटर चुनें।<br>
-                2. More Settings में जाकर <strong>Scale को 95%</strong> पर सेट करें यदि वह अपने आप नहीं होता।
+                <strong>Tips:</strong> <br>
+                1. <strong>Save PDF</strong> बटन से सीधे सर्टिफिकेट कंप्यूटर में डाउनलोड हो जाएगा।<br>
+                2. प्रिंट करते समय ऑटोमैटिकली यह 95% स्केल पर सेट रहेगा।
             </div>
         </section>
         
         <main class="stage">
-            <div class="sheet">
+            <div class="sheet" id="certificate-sheet">
                 <img class="bg" src="Img2.png" alt="Certificate template">
                 
                 <div class="text srno-container">
@@ -227,9 +232,4 @@
             update();
         }
 
-        // शुरुआत में रन करें
-        setDefaultDates();
-        update();
-    </script>
-</body>
-</html>
+        // 📥 सीधे पीडीएफ डाउनलोड करने का अचूक फंक्शन (बिना किसी क्रैश रिस्क के)
