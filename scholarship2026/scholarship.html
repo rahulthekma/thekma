@@ -49,8 +49,8 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap items-center justify-center gap-2">
-                    <a href="https://scholarship.up.gov.in/" target="_blank" rel="noopener" class="bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-bold px-3 py-2 rounded-lg transition flex items-center gap-1 shadow">
-                        <span>📊</span> स्थिति जांचें (Status)
+                    <a href="https://rahulthekma.github.io/thekma/scholarship2026/Document_Adviser.html" target="_blank" rel="noopener" class="bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-bold px-3 py-2 rounded-lg transition flex items-center gap-1 shadow">
+                        <span>📋</span> आवश्यक दस्तावेजों देखें
                     </a>
                     <a href="https://scholarship.up.gov.in/" target="_blank" rel="noopener" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-2 rounded-lg transition flex items-center gap-1 shadow">
                         <span>🌐</span> मुख्य पोर्टल
@@ -340,97 +340,12 @@
             </div>
         </section>
 
-        <!-- UTILITY SECTION: DOCUMENT CHECKLIST & VISUAL TRACKER -->
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-
-            <!-- Interactive Document Checklist -->
-            <div class="lg:col-span-7 bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                <div class="flex items-center justify-between mb-3 border-b border-slate-100 pb-2">
-                    <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-                        <span>📑</span> आवश्यक दस्तावेज चेकलिस्ट (Document Checklist)
-                    </h3>
-                    <span id="checklistProgress" class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">0/6 तैयार</span>
-                </div>
-                <p class="text-xs text-slate-500 mb-4">आवेदन फॉर्म भरने से पहले जनसेवा केंद्र आने पर नीचे दिए गए सभी दस्तावेज साथ लाएं:</p>
-
-                <div class="space-y-2.5 text-xs">
-                    <label class="flex items-start gap-2.5 p-2 rounded bg-slate-50 hover:bg-indigo-50/50 cursor-pointer transition">
-                        <input type="checkbox" onchange="updateChecklist()" class="doc-check mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
-                        <div>
-                            <span class="font-bold text-slate-800">आधार कार्ड (Aadhaar Card)</span>
-                            <p class="text-slate-500">मोबाइल नंबर आधार से लिंक होना अनिवार्य है (OTP सत्यापन हेतु)।</p>
-                        </div>
-                    </label>
-
-                    <label class="flex items-start gap-2.5 p-2 rounded bg-slate-50 hover:bg-indigo-50/50 cursor-pointer transition">
-                        <input type="checkbox" onchange="updateChecklist()" class="doc-check mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
-                        <div>
-                            <span class="font-bold text-slate-800">बैंक खाता एवं NPCI/DBT मैपिंग</span>
-                            <p class="text-slate-500">खाता आधार से सीडेड और NPCI पोर्टल्ड होना अनिवार्य है।</p>
-                        </div>
-                    </label>
-
-                    <label class="flex items-start gap-2.5 p-2 rounded bg-slate-50 hover:bg-indigo-50/50 cursor-pointer transition">
-                        <input type="checkbox" onchange="updateChecklist()" class="doc-check mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
-                        <div>
-                            <span class="font-bold text-slate-800">आय, जाति प्रमाण पत्र</span>
-                            <p class="text-slate-500">ऑनलाइन वेरीफाइड प्रमाण पत्र (आय प्रमाण पत्र पिता या माता का हो)।</p>
-                        </div>
-                    </label>
-
-                    <label class="flex items-start gap-2.5 p-2 rounded bg-slate-50 hover:bg-indigo-50/50 cursor-pointer transition">
-                        <input type="checkbox" onchange="updateChecklist()" class="doc-check mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
-                        <div>
-                            <span class="font-bold text-slate-800">फीस रसीद एवं एनरोलमेंट नंबर</span>
-                            <p class="text-slate-500">संस्था में जमा फीस की रसीद एवं पंजीयन/रोल नंबर।</p>
-                        </div>
-                    </label>
-
-                    <label class="flex items-start gap-2.5 p-2 rounded bg-slate-50 hover:bg-indigo-50/50 cursor-pointer transition">
-                        <input type="checkbox" onchange="updateChecklist()" class="doc-check mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
-                        <div>
-                            <span class="font-bold text-slate-800">पिछली कक्षा की मार्कशीट</span>
-                            <p class="text-slate-500">गत वर्ष की परीक्षा के प्राप्तांक, पूर्णांक एवं बोर्ड पंजीकरण संख्या की सही जानकारी।</p>
-                        </div>
-                    </label>
-
-                    <label class="flex items-start gap-2.5 p-2 rounded bg-slate-50 hover:bg-indigo-50/50 cursor-pointer transition">
-                        <input type="checkbox" onchange="updateChecklist()" class="doc-check mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
-                        <div>
-                            <span class="font-bold text-slate-800">OTR नंबर (One Time Registration)</span>
-                            <p class="text-slate-500">UPSDC OTR पोर्टल पर पंजीकृत OTR संख्या।</p>
-                        </div>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Chart Visualization: Application Steps Progress -->
-            <div class="lg:col-span-5 bg-white rounded-xl border border-slate-200 p-5 shadow-sm flex flex-col justify-between">
-                <div>
-                    <h3 class="font-bold text-slate-900 text-base mb-1 flex items-center gap-2">
-                        <span>📈</span> आवेदन प्रक्रिया चरण
-                    </h3>
-                    <p class="text-xs text-slate-500 mb-3">सफल छात्रवृत्ति प्राप्त करने का सही क्रम:</p>
-                </div>
-
-                <div class="chart-container">
-                    <canvas id="stepChart"></canvas>
-                </div>
-
-                <div class="mt-3 text-center">
-                    <span class="text-xs text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full font-medium inline-block">
-                        ✓ राहुल गुप्ता जनसेवा केंद्र पर सभी चरण 100% शुद्धता से पूर्ण किए जाते हैं
-                    </span>
-                </div>
-            </div>
-
-        </section>
-
+        
        
         <!-- FOOTER -->
         <footer class="bg-white rounded-xl border border-slate-200 p-4 text-center text-xs text-slate-600 shadow-sm">
             <div class="font-bold text-slate-800 text-sm mb-1">Rahul Gupta Janseva Kendra</div>
-            <p>संपर्क एवं सहायता हेतु केंद्र पर पधारें | ऑनलाइन फॉर्म, आय/जाति/निवास, आधार संशोधन एवं स्कॉलरशिप सेवाएँ</p>
+            <p>संपर्क एवं सहायता हेतु केंद्र पर पधारें | ऑनलाइन फॉर्म, आय/जाति/निवास, एवं स्कॉलरशिप सेवाएँ</p>
             <div class="mt-2 text-slate-400">© 2026 Student Service Portal. Official Links Source: scholarship.up.gov.in </div>
         </footer>
 
